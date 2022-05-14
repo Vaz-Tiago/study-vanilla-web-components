@@ -7,20 +7,27 @@
     <title>Vanilla - Web Components</title>
     <script src="tooltip.js"></script>
     <script src="confirm-link.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        --color-primary: #75cfed;
+        font-family: sans-serif;
+      }
+    </style>
   </head>
   <body>
     <p>
       <vaz-tooltip
+        class="important"
         text="Web Components is a set of standards."
-        bg-color="green"
       >
-        Web Components
+        <span>Web Components</span>
       </vaz-tooltip>
       learning project!
     </p>
-
-    <vaz-tooltip>Just another text for example!</vaz-tooltip>
-    <br />
+    <vaz-tooltip></vaz-tooltip>
     <a is="vaz-confirm-link" href="https://google.com">Google</a>
   </body>
 </html>
