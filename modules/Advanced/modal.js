@@ -39,7 +39,7 @@ class Modal extends HTMLElement {
         :host([opened]) #backdrop,
         :host([opened]) #modal {
           opacity: 1;
-          pointer-events: 'all';
+          pointer-events: all;
         }
 
         header {
@@ -71,17 +71,23 @@ class Modal extends HTMLElement {
           <slot></slot>
         </section>
         <section id='actions'>
-          <button>Cancel</button>
-          <button>Confirm</button>
+          <button id='cancel-button'>Cancel</button>
+          <button id='confirm-button'>Confirm</button>
         </section>
       </div>
     `;
 
     // this is useful when we need control the slot changes
-    const slots = this.shadowRoot.querySelectorAll("slot");
-    slots[1].addEventListener("slotchange", (e) => {
-      console.dir(slots[1].assignedNodes());
-    });
+    // const slots = this.shadowRoot.querySelectorAll("slot");
+    // slots[1].addEventListener("slotchange", (e) => {
+    //   console.dir(slots[1].assignedNodes());
+    // });
+
+    const cancelButton = this.shadowRoot.querySelector("#cancel-button");
+    const confirmButton = this.shadowRoot.querySelector("#confirm-button");
+
+    cancelButton.addEventListener("click", this._cancel.bind(this));
+    confirmButton.addEventListener("click", this._confirm.bind(this));
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -95,6 +101,19 @@ class Modal extends HTMLElement {
 
   open() {
     this.setAttribute("opened", "");
+  }
+
+  hide() {
+    if (this.hasAttribute("opened")) this.removeAttribute("opened");
+    this.isOpen = false;
+  }
+
+  _cancel() {
+    this.hide();
+  }
+
+  _confirm() {
+    this.hide();
   }
 }
 

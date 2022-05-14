@@ -27,6 +27,15 @@
     <script>
       const openModalButton = document.querySelector("button");
       const modal = document.querySelector("vaz-modal");
+
+      modal.addEventListener("confirm", () => {
+        console.log("Confirmed...");
+      });
+
+      modal.addEventListener("canceled", () => {
+        console.log("Cancelled...");
+      });
+
       openModalButton.addEventListener("click", () => {
         if (!modal.isOpen) modal.open();
       });
